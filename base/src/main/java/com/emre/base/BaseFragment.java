@@ -9,15 +9,19 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
-abstract class BaseFragment extends Fragment implements BaseInterface {
+public abstract class BaseFragment extends Fragment implements BaseInterface {
 
     private Context context;
     private ProgressPanel progressPanel;
+    public String title;
+
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -28,8 +32,17 @@ abstract class BaseFragment extends Fragment implements BaseInterface {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        initUI();
-        return inflater.inflate(getFragmentLayout(),container,false);
+        return inflater.inflate(getFragmentLayout(), container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        initUI(view);
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    public <T extends View> T findViewById(@IdRes int id) {
+        return getActivity().findViewById(id);
     }
 
     //region Navigation
@@ -70,31 +83,31 @@ abstract class BaseFragment extends Fragment implements BaseInterface {
         return intent;
     }
 
-    public void startShake(View v,@StringRes int resId){
+    public void startShake(View v, @StringRes int resId) {
         startShake(v);
         showToast(resId);
     }
 
-    public void startShake(View view){
+    public void startShake(View view) {
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake));
     }
 
-    protected void showToast(@StringRes int resId){
-        if(resId != -1)
-            ToastUtils.showToast(context,resId);
+    protected void showToast(@StringRes int resId) {
+        if (resId != -1)
+            ToastUtils.showToast(context, resId);
     }
 
-    protected void showLongToast(@StringRes  int resId){
-        if(resId != -1)
-            ToastUtils.showToast(context,resId, Toast.LENGTH_LONG);
+    protected void showLongToast(@StringRes int resId) {
+        if (resId != -1)
+            ToastUtils.showToast(context, resId, Toast.LENGTH_LONG);
     }
 
-    protected void showToast(CharSequence text){
-        ToastUtils.showToast(context,text);
+    protected void showToast(CharSequence text) {
+        ToastUtils.showToast(context, text);
     }
 
-    protected void showLongToast(CharSequence text){
-        ToastUtils.showToast(context,text, Toast.LENGTH_LONG);
+    protected void showLongToast(CharSequence text) {
+        ToastUtils.showToast(context, text, Toast.LENGTH_LONG);
     }
 
     @Override
@@ -104,7 +117,7 @@ abstract class BaseFragment extends Fragment implements BaseInterface {
 
     @Override
     public void onError(String error) {
-        progressPanel.showProgress(false,error);
+        progressPanel.showProgress(false, error);
     }
 
     @Override

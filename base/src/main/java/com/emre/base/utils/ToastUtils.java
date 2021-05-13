@@ -1,4 +1,4 @@
-package com.emre.base;
+package com.emre.base.utils;
 
 import android.content.Context;
 import android.widget.Toast;

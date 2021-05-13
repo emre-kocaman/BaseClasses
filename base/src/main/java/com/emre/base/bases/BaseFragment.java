@@ -1,4 +1,4 @@
-package com.emre.base;
+package com.emre.base.bases;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,10 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
+import com.emre.base.utils.BaseProgress;
+import com.emre.base.R;
+import com.emre.base.utils.ToastUtils;
+
 public abstract class BaseFragment extends Fragment implements BaseInterface {
 
     private Context context;
-    private ProgressPanel progressPanel;
+    private BaseProgress progress;
     public String title;
 
 
@@ -26,7 +30,7 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.context = context;
-        progressPanel = new ProgressPanel(context);
+        progress = new BaseProgress(context);
     }
 
     @Nullable
@@ -37,7 +41,7 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        initUI(view);
+        initUI();
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -112,17 +116,22 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
 
     @Override
     public void onProgress() {
-        progressPanel.showProgress();
+        progress.showProgress();
     }
 
     @Override
     public void onError(String error) {
-        progressPanel.showProgress(false, error);
+        progress.showProgress(false, error);
+    }
+
+    @Override
+    public void onError() {
+        progress.showProgress(false, getString(R.string.somethingWentWrong));
     }
 
     @Override
     public void hideProgress() {
-        progressPanel.hideProgress();
+        progress.hideProgress();
     }
 
     public abstract int getFragmentLayout();

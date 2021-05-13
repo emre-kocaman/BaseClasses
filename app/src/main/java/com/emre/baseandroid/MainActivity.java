@@ -1,14 +1,37 @@
 package com.emre.baseandroid;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
 
-import android.os.Bundle;
+import com.emre.base.bases.BaseActivity;
+import com.emre.base.bases.BaseRecyclerViewAdapter;
+import com.emre.base.bases.BaseViewHolder;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends BaseActivity {
+
+    private TextView tv;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public int getActivityLayoutId() {
+        return R.layout.activity_main;
     }
+
+    @Override
+    public void initUI() {
+        tv = findView(R.id.tv);
+        tv.setOnClickListener(this::startShake);
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initListeners() {
+
+    }
+
 }

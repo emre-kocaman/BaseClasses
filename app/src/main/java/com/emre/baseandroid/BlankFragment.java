@@ -1,31 +1,32 @@
 package com.emre.baseandroid;
 
-import android.view.View;
 import android.widget.TextView;
 
-import com.emre.base.BaseFragment;
+import com.emre.base.bases.BaseFragment;
 
 
 public class BlankFragment extends BaseFragment {
 
-    TextView tv;
+    private TextView tv;
+
     @Override
     public int getFragmentLayout() {
         return R.layout.fragment_blank;
     }
 
     @Override
-    public void initUI(View v) {
+    public void initUI() {
         tv = (TextView) findViewById(R.id.tv);
-
-
 
     }
 
     @Override
-    public void onError() {
+    public void initData() {
 
     }
 
-
+    @Override
+    public void initListeners() {
+        tv.setOnClickListener(this::startShake);
+    }
 }

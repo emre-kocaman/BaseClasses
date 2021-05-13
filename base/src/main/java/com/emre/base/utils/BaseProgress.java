@@ -1,4 +1,4 @@
-package com.emre.base;
+package com.emre.base.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -12,9 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.emre.base.R;
 
 
-public class ProgressPanel {
+public class BaseProgress {
     private final Context context;
     public Dialog dialog, dialogInfo, dialogConfirm;
     private int animation = R.raw.progress;
@@ -23,22 +24,22 @@ public class ProgressPanel {
     public MutableLiveData<Boolean> confirmListener = new MutableLiveData<>();
 
 
-    public ProgressPanel(Context context) {
+    public BaseProgress(Context context) {
         this.context = context;
     }
 
-    public ProgressPanel(Context context, int animation, int delay) {
+    public BaseProgress(Context context, int animation, int delay) {
         this.context = context;
         this.animation = animation;
         this.delay = delay;
     }
 
-    public ProgressPanel(Context context, int delay) {
+    public BaseProgress(Context context, int delay) {
         this.context = context;
         this.delay = delay;
     }
 
-    public ProgressPanel(Fragment fragment) {
+    public BaseProgress(Fragment fragment) {
         //defaultMessage = activity.getResources().getString(R.string.default_progress_message);
         context = fragment.getActivity();
         dialog = new ProgressDialog(context);

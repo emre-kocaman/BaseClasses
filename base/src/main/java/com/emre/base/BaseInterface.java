@@ -6,7 +6,7 @@ public interface BaseInterface {
     void initUI();
 
     //States
-    void onProgress();
+    void onProgress(int progress);
     void onError();
     void hideProgress();
     void onError(String error);

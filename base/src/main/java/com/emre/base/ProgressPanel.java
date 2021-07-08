@@ -48,15 +48,26 @@ public class ProgressPanel {
 
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void showProgress() {
+    public void showProgress(String progress) {
         if (dialog == null) {
             dialog = new Dialog(context);
             dialog.setCancelable(false);
             View v = LayoutInflater.from(context).inflate(R.layout.fragment_lottie_dialog, null, false);
-            if (animation != R.raw.progress) {
-                LottieAnimationView animationView = v.findViewById(R.id.animationView);
-                animationView.setAnimation(animation);
+
+            if (progress.equals("standard")) {
+                if (animation != R.raw.progress) {
+                    animation = R.raw.progress;
+                    LottieAnimationView animationView = v.findViewById(R.id.animationView);
+                    animationView.setAnimation(animation);
+                }
+            } else {
+                if (animation != R.raw.plane) {
+                    animation = R.raw.plane;
+                    LottieAnimationView animationView = v.findViewById(R.id.animationView);
+                    animationView.setAnimation(animation);
+                }
             }
+
 
             dialog.setContentView(v);
             dialog.getWindow().setBackgroundDrawable(context.getResources().getDrawable(android.R.color.transparent));

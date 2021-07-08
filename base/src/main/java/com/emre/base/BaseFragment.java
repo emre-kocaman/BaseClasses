@@ -18,6 +18,7 @@ abstract class BaseFragment extends Fragment implements BaseInterface {
 
     private Context context;
     private ProgressPanel progressPanel;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -29,7 +30,7 @@ abstract class BaseFragment extends Fragment implements BaseInterface {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         initUI();
-        return inflater.inflate(getFragmentLayout(),container,false);
+        return inflater.inflate(getFragmentLayout(), container, false);
     }
 
     //region Navigation
@@ -70,41 +71,50 @@ abstract class BaseFragment extends Fragment implements BaseInterface {
         return intent;
     }
 
-    public void startShake(View v,@StringRes int resId){
+    public void startShake(View v, @StringRes int resId) {
         startShake(v);
         showToast(resId);
     }
 
-    public void startShake(View view){
-        view.startAnimation(AnimationUtils.loadAnimation(context,R.anim.shake));
+    public void startShake(View view) {
+        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake));
     }
 
-    protected void showToast(@StringRes int resId){
-        if(resId != -1)
-            ToastUtils.showToast(context,resId);
+    protected void showToast(@StringRes int resId) {
+        if (resId != -1)
+            ToastUtils.showToast(context, resId);
     }
 
-    protected void showLongToast(@StringRes  int resId){
-        if(resId != -1)
-            ToastUtils.showToast(context,resId, Toast.LENGTH_LONG);
+    protected void showLongToast(@StringRes int resId) {
+        if (resId != -1)
+            ToastUtils.showToast(context, resId, Toast.LENGTH_LONG);
     }
 
-    protected void showToast(CharSequence text){
-        ToastUtils.showToast(context,text);
+    protected void showToast(CharSequence text) {
+        ToastUtils.showToast(context, text);
     }
 
-    protected void showLongToast(CharSequence text){
-        ToastUtils.showToast(context,text, Toast.LENGTH_LONG);
+    protected void showLongToast(CharSequence text) {
+        ToastUtils.showToast(context, text, Toast.LENGTH_LONG);
     }
 
     @Override
-    public void onProgress() {
-        progressPanel.showProgress();
+    public void onError() {
+        progressPanel.showProgress(false,"Error");
     }
+
+    @Override
+    public void onProgress(int progress) {
+        if (progress == 0)
+            progressPanel.showProgress("plane");
+        else
+            progressPanel.showProgress("standard");
+    }
+
 
     @Override
     public void onError(String error) {
-        progressPanel.showProgress(false,error);
+        progressPanel.showProgress(false, error);
     }
 
     @Override

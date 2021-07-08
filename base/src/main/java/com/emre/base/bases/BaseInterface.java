@@ -5,6 +5,7 @@ import android.view.View;
 public interface BaseInterface {
 
     //Beginning
+    void initUI(View v);
     void initUI();
 
     void initData();

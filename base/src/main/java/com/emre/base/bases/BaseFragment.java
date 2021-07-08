@@ -41,7 +41,7 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        initUI();
+        initUI(view);
         super.onViewCreated(view, savedInstanceState);
     }
 

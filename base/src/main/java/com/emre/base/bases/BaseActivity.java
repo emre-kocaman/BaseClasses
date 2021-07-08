@@ -125,6 +125,4 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseInte
 
 
     public abstract int getActivityLayoutId();
-
-
 }

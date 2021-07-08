@@ -115,8 +115,20 @@ public abstract class BaseFragment extends Fragment implements BaseInterface {
     }
 
     @Override
-    public void onProgress() {
-        progress.showProgress();
+    public void onProgress(int code) {
+        if (code == 0){
+            progress.showProgress("standard",null);
+        } else {
+            progress.showProgress("plane",null);
+        }
+    }
+    @Override
+    public void onProgress(int code,String color) {
+        if (code == 0){
+            progress.showProgress("standard",color);
+        } else {
+            progress.showProgress("plane",color);
+        }
     }
 
     @Override

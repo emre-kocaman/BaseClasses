@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 
@@ -49,15 +51,22 @@ public class BaseProgress {
 
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void showProgress() {
+    public void showProgress(String progress, @Nullable String color) {
         if (dialog == null) {
             dialog = new Dialog(context);
             dialog.setCancelable(false);
             View v = LayoutInflater.from(context).inflate(R.layout.fragment_lottie_dialog, null, false);
-            if (animation != R.raw.progress) {
-                LottieAnimationView animationView = v.findViewById(R.id.animationView);
-                animationView.setAnimation(animation);
+            if (progress.equals("standard")) {
+                animation = R.raw.progress;
+            } else {
+                animation = R.raw.plane;
             }
+
+            LottieAnimationView animationView = v.findViewById(R.id.animationView);
+            if (color != null)
+                animationView.setBackgroundColor(Color.parseColor(color));
+            animationView.setAnimation(animation);
+
 
             dialog.setContentView(v);
             dialog.getWindow().setBackgroundDrawable(context.getResources().getDrawable(android.R.color.transparent));

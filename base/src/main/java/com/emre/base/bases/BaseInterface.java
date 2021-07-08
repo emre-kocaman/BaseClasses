@@ -13,7 +13,8 @@ public interface BaseInterface {
 
 
     //States
-    void onProgress();
+    void onProgress(int progress);
+    void onProgress(int progress,String Color);
 
     void onError();
 
